@@ -9,7 +9,7 @@ Intellij IDEA中如何创建一个简单的Spring项目
 
 (3)在xxx.xml中添加该Bean类，设置id名，并设置属性值。
 
-(4)在main函数中调用该xxx.xml配置文件生成的IOC容器对象ApplicationContext类型
+(4)在main函数中调用该xxx.xml配置文件生成的IOC容器对象ApplicationContext接口
 
 (5)调用该容器对象的getBean(Hello对应的id名)，获取Hello对象
 
