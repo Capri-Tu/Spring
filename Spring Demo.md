@@ -16,6 +16,15 @@ Intellij IDEA中如何创建一个简单的Spring项目
 (6)调用Hello对象的方法，输出结果
 
 
+ApplicationContext接口：IOC容器对象接口
+--
+ApplicationContext接口有两个主要的实现类：
+
+* ClassPathXmlApplicationContext：从类路径下加载配置文件
+* FileSystemXmlApplicationContext:从文件系统中加载配置文件
+
+> ApplicationContext在初始化上下文时就实例化所有单例的Bean
+
 参考链接
 --
 https://blog.csdn.net/shanmoweiyunjun/article/details/77727257
