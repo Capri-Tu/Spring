@@ -6,11 +6,7 @@
 
 ## Intellij IDEA的安装
 
-Intellij IDEA要使用旗舰版，旗舰版网上有很多激活方法就不赘述了。我使用的版本如下：
-
-![image.png-132kB][1]
-
-
+Intellij IDEA要使用旗舰版，旗舰版网上有很多激活方法就不赘述了。我使用的版本为Ultimate 2018.2
 
 
 ## 新建Spring工程
@@ -114,6 +110,7 @@ public static void main(String[]args){
 
 ![image.png-44.3kB][12]
 
+
 ## Spring调用Bean的流程
 
 > Spring IOC在创建的时候会先调用 HelloWorld的构造函数，然后调用setter方法对studentName进行赋值
@@ -150,7 +147,6 @@ public class HelloWorld {
 
 > 上述是使用setter方法注入Bean,还可以用构造函数的方式进行注入（设置参数值）
 
-  [1]: http://static.zybuluo.com/lihuijuan114/1jrpupplfthxn8yhlnow4wto/image.png
   [2]: http://static.zybuluo.com/lihuijuan114/6zjs1bcewcuj4crk0gbyv151/image.png
   [3]: http://static.zybuluo.com/lihuijuan114/dfb1ay84bz5p4jl2cbuwu96x/image.png
   [4]: http://static.zybuluo.com/lihuijuan114/8se5fj0nkcfbrymw86g10yyd/image.png
@@ -161,5 +157,5 @@ public class HelloWorld {
   [9]: http://static.zybuluo.com/lihuijuan114/3pjaxxyaglf3gclhrqcn1suh/image.png
   [10]: http://static.zybuluo.com/lihuijuan114/0z1yubdia6xh49kdnkbfnwrz/image.png
   [11]: http://static.zybuluo.com/lihuijuan114/9iddctncxovreybr2mfw1ozd/image.png
-  [12]: http://static.zybuluo.com/lihuijuan114/xw9u44byr3gm92u32zahqa6m/image.png
+  [12]: http://static.zybuluo.com/lihuijuan114/h8uzptxl3y6anbidknd803wx/image.png
   [13]: http://static.zybuluo.com/lihuijuan114/hmgztjlq6k59naw2laztl7aj/image.png
