@@ -7,6 +7,7 @@
 ## Intellij IDEA的安装
 
 Intellij IDEA要使用旗舰版，旗舰版网上有很多激活方法就不赘述了。我使用的版本如下：
+
 ![image.png-132kB][1]
 
 
@@ -67,7 +68,7 @@ public class HelloWorld {
 ```
 ![image.png-119kB][10]
 
-## 在我们不使用框架的时候，也就是平常的编程中，我们要调用sayHello这个方法，可以分为3步。 
+**在我们不使用框架的时候，也就是平常的编程中，我们要调用sayHello这个方法，可以分为3步。 **
 
 * 1. 创建一个HelloWorld的实例对象 
 
@@ -147,7 +148,7 @@ public class HelloWorld {
 
 
 
-还可以用构造函数的方式进行注入（设置参数值）
+> 上述是使用setter方法注入Bean,还可以用构造函数的方式进行注入（设置参数值）
 
   [1]: http://static.zybuluo.com/lihuijuan114/1jrpupplfthxn8yhlnow4wto/image.png
   [2]: http://static.zybuluo.com/lihuijuan114/6zjs1bcewcuj4crk0gbyv151/image.png
