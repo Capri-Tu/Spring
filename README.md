@@ -31,6 +31,7 @@ Intellij IDEA要使用旗舰版，旗舰版网上有很多激活方法就不赘�
 
 其中lib目录下已经自动下载好了我们需要的jar包
 
+
 ![image.png-17.5kB][6]
 
 spring-config.xml中的内容如下图所示：
@@ -66,9 +67,11 @@ public class HelloWorld {
     }
 }
 ```
+
 ![image.png-119kB][10]
 
-**在我们不使用框架的时候，也就是平常的编程中，我们要调用sayHello这个方法，可以分为3步。 **
+
+> 在我们不使用框架的时候，也就是平常的编程中，我们要调用sayHello这个方法，可以分为3步。 
 
 * 1. 创建一个HelloWorld的实例对象 
 
