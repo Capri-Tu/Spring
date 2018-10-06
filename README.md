@@ -68,9 +68,6 @@ public class HelloWorld {
 }
 ```
 
-![image.png-119kB][10]
-
-
 > 在我们不使用框架的时候，也就是平常的编程中，我们要调用sayHello这个方法，可以分为3步。 
 
 * 1. 创建一个HelloWorld的实例对象 
