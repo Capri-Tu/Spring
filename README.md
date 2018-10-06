@@ -2,7 +2,7 @@
 
 ---
 
-> 该项目是作为我的Spring Demo，Demo源码见 ./spring-lihuijuan ,可以下载后直接运行。Demo的搭建见下面部分,下面是一个Spring Demo体现IOC作用的例子:.......
+> 该项目是作为我的Spring Demo，Demo源码见 ./spring-lihuijuan ,可以下载后直接运行。Demo的搭建见下面部分,下面是一个Spring Demo体现IOC作用的例子:
 
 ## Intellij IDEA的安装
 
