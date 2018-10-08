@@ -261,6 +261,50 @@ Spring允许继承bean的配置，被继承的bean称为父bean，继承这个�
 ```
 
 Bean的作用域：Singleton；prototype;WEB环境作用域
+--
+默认情况下bean是单例的
+
+利用bean的scope属性来配置bean的作用域
+
+singleton:默认值，容器初始时创建bean实例，在整个容器的周期只有这一个bean实例，每次getbean()都是这同一个bean
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="car" class="com.lihuijuan.spring.beans.Car"
+          scope="prototype" p:brand="sss" p:corp="adf" p:price="222" p:maxSpeed="32">
+    </bean>
+</beans>
+```
+
+执行:
+```
+   public static void main(String[]args){
+        ApplicationContext context = new ClassPathXmlApplicationContext("prototype-config.xml");
+    }
+```
+
+则不会对Car进行初始化。如果去掉scope或者 scope="singleton",则会初始化
+
+ scope="prototype"时执行如下语句：
+```
+ public static void main(String[]args){
+        ApplicationContext context = new ClassPathXmlApplicationContext("prototype-config.xml");
+        Car car1 = (Car) context.getBean("car");
+        Car car2 = (Car) context.getBean("car");
+        System.out.println(car1==car2);
+    }
+```
+
+可输出:
+```
+Setter: Construct Car ....
+Setter: Construct Car ....
+false
+```
+说明每次调用getBean，就会生成一个新的bean，也就是会创建多例
 
 IOC容器中Bean的生命周期
 
