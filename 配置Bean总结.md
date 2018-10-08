@@ -268,6 +268,8 @@ Bean的作用域：Singleton；prototype;WEB环境作用域
 
 singleton:默认值，容器初始时创建bean实例，在整个容器的周期只有这一个bean实例，每次getbean()都是这同一个bean
 
+prototype:原型的，容器初始化时不创建bean的实例，而在每次请求时都创建一个新的bean实例，并返回。
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
