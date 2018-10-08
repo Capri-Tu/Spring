@@ -53,6 +53,79 @@ ApplicationContext的主要实现类:
 ```
 Bean之间的关系：继承；依赖
 
+引用其他Bean
+--
+
+一个类Person:
+```
+package com.lihuijuan.spring.beans;
+
+public class Person {
+    private String name;
+    private int age;
+    private Car car;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", car=" + car +
+                '}';
+    }
+}
+
+```
+如果想 注入这个bean，由于属性中包含了bean，可以用两种方式来配置：
+
+* 外部bean: 用ref建立引用关系
+```
+ <!--可以使用property中的ref属性建立bean之间的引用关系-->
+    <bean id="person" class="com.lihuijuan.spring.beans.Person">
+        <property name="name" value="Tom"></property>
+        <property name="age" value="24"></property>
+        <property name="car" ref="car2"></property>
+    </bean>
+```
+
+或者
+```
+  <!--可以使用constructor-arg的ref属性建立bean之间的引用关系-->
+    <bean id="person" class="com.lihuijuan.spring.beans.Person">
+        <constructor-arg value="Ford"></constructor-arg>
+        <constructor-arg value="1"></constructor-arg>
+        <constructor-arg ref="car2"></constructor-arg>
+    </bean>
+```
+* 内部bean
+```
+<bean id="person2" class="com.lihuijuan.spring.beans.Person">
+        <property name="name" value="Tom"></property>
+        <property name="age" value="24"></property>
+        <!--内部bean，不能被外部引用，没有id，只能内部使用-->
+        <property name="car" >
+            <bean class="com.lihuijuan.spring.beans.Car">
+                <constructor-arg value="Ford"></constructor-arg>
+                <constructor-arg value="changan"></constructor-arg>
+                <constructor-arg value="20000"></constructor-arg>
+            </bean>
+         </property>
+    </bean>
+```
+
+
 Bean的作用域：Singleton；prototype;WEB环境作用域
 
 IOC容器中Bean的生命周期
