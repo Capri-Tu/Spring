@@ -4,7 +4,7 @@
 
 配置形式：基于XML文件的方式；基于注解的方式（注解功能优于配置文件装配bean,在工作中大多数遇到的是使用注解的方法注入bean。）
 
-Bean的配置方式：通过全类名（反射）、通过工厂方法（静态工厂方法&实例工厂方法）、FactoryBean
+Bean的配置方式：通过全类名（反射）、通过工厂方法（静态工厂方法&实例工厂方法）、FactoryBean(Spring自带的接口，我们需要实现该接口)
 
 IOC容器BeanFactory&ApplicationContext概述
 --
