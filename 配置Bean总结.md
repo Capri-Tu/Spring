@@ -497,5 +497,66 @@ public static void main(String[]args){
 Car{name='audi', price=300000}
 ```
 
+实例工厂方法方式创建bean实例
+--
 
+Car类不变，同上
+
+实例工厂类如下所示：
+```
+package com.lihuijuan.spring.beans.factory;
+
+import java.util.HashMap;
+import java.util.Map;
+//实例工厂方法：实例工厂的方法，即需要创建工厂本身，再调用工厂的实例方法来返回bean
+public class InstanceCarFactory {
+    private static Map<String,Car> cars = null;
+    public InstanceCarFactory(){
+        cars = new <String,Car>HashMap();
+        cars.put("audi",new Car("audi",300000));
+        cars.put("ssss",new Car("ssss",200000));
+    }
+    //实例工厂方法
+    public Car getCar(String name){
+        return cars.get(name);
+    }
+}
+
+```
+
+xml配置文件中关于bean的配置为:
+
+```
+ <!--配置工厂的实例-->
+    <bean id = "car" class="com.lihuijuan.spring.beans.factory.StaticCarFactory"
+          factory-method="getCar">
+          <constructor-arg value="audi"></constructor-arg>
+    </bean>
+    <!--通过实例工厂方法配置bean，注意不是配置静态工厂方法实例，而是配置bean实例
+        class属性：指向静态工厂方法的全类名
+        factory-bean:指向实力工程方法的bean
+        factory-method:指向实例工厂方法的名字
+        constructor-arg:如果工厂方法需要传入参数，则使用contructor-arg来配置参数
+    -->
+    <bean id = "carFactory" class="com.lihuijuan.spring.beans.factory.InstanceCarFactory"
+    ></bean>
+    <bean id = "car2" factory-bean="carFactory" factory-method="getCar">
+        <constructor-arg value="ssss"></constructor-arg>
+    </bean>
+```
+测试：
+```
+ public static void main(String[]args){
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean-factory.xml");
+        Car car = (Car) context.getBean("car");
+        System.out.println(car.toString());
+        Car car2 = (Car) context.getBean("car2");
+        System.out.println(car2.toString());
+    }
+```
+
+输出结果为：
+```
+Car{name='ssss', price=200000}
+```
 Spring4.x新特性：泛型依赖注入
