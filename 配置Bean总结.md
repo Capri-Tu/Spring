@@ -144,6 +144,16 @@ public class Person {
     </bean>
 ```
 
+自动装配
+--
+Spring IOC容器可以自动装配Bean，我们需要做的仅仅是在<bean>的autowire属性里指定自动装配的模式
+ 
+* byType（根据类型自动装配）：若IOC容器中有多个与目标Bean类型一致的Bean，在这种情况下，Spring将无法判断哪个Bean最合适该属性，所以不能执行自动装配
+
+* byName(根据名称id自动装配)，必须将目标Bean的名称和属性名设置的完全相同 
+
+* constructor(通过构造器自动装配)，当Bean中存在多个构造器时，此种自动装配方式会很复杂，不推荐使用
+
 Bean的作用域：Singleton；prototype;WEB环境作用域
 
 IOC容器中Bean的生命周期
