@@ -65,6 +65,14 @@ public class Person {
     private int age;
     private Car car;
 
+    public  Person(){
+
+    }
+    public Person(String name,int age,Car car){
+        this.name = name;
+        this.age = age;
+        this.car = car;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -86,6 +94,7 @@ public class Person {
                 '}';
     }
 }
+
 
 ```
 如果想 注入这个bean，由于属性中包含了bean，可以用两种方式来配置：
