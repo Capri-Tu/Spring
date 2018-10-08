@@ -25,8 +25,32 @@ ApplicationContext的主要实现类:
 
 * FileSystemXmlApplicationContext
 
-依赖注入的方式：属性注入；构造器注入
+依赖注入的方式：属性注入；构造器注入，工厂方法注入(工厂方法注入很少用，不推荐)
 
+(1)属性注入
+
+```
+<bean id="helloWorld" class = "com.lihuijuan.spring.beans.HelloWorld"> //全类名反射,id是唯一标识
+    //如果Helloworld有一个setStudentName方法，那么这里的name就是studentname
+    <property name="studentName" value="lihuijuan"></property>    
+</bean>
+```
+(2)构造器注入
+
+```
+  <!--通过构造方法来配置Bean的属性，在constructor-arg里面配置属性-->
+<bean id="car1" class="com.lihuijuan.spring.beans.Car">
+    <constructor-arg value="Audi"></constructor-arg>
+    <constructor-arg value="Shanghai"></constructor-arg>
+    <constructor-arg value="300000" type="int"></constructor-arg>
+    <!--使用构造器可以设定参数的位置和参数的类型，以区分重载-->
+</bean>
+    <bean id="car2" class="com.lihuijuan.spring.beans.Car">
+        <constructor-arg value="Audi"></constructor-arg>
+        <constructor-arg value="Shanghai"></constructor-arg>
+        <constructor-arg value="300000" type="double"></constructor-arg>
+    </bean>
+```
 Bean之间的关系：继承；依赖
 
 Bean的作用域：Singleton；prototype;WEB环境作用域
