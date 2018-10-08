@@ -417,4 +417,85 @@ init...
 十月 08, 2018 9:12:04 下午 org.springframework.context.support.ClassPathXmlApplicationContext doClose
 destroy...
 ```
+静态工厂方法创建bean实例
+--
+
+Car类：
+```
+package com.lihuijuan.spring.beans.factory;
+
+public class Car {
+    private String name;
+    private int price;
+    public Car(String name,int price){
+        this.name = name;
+        this.price = price;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+
+```
+静态工厂类:（简单工厂模式实现）
+```
+package com.lihuijuan.spring.beans.factory;
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+//静态工厂方法：直接调用某一个类的静态方法就可以调用一个bean的实例
+public class StaticCarFactory {
+    private static Map<String,Car> cars = new HashMap();
+    static {
+        cars.put("audi",new Car("audi",300000));
+        cars.put("ssss",new Car("ssss",200000));
+    }
+    //静态工厂方法
+    public static Car getCar(String name){
+        return cars.get(name);
+    }
+}
+
+```
+
+xml文件配置
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--通过静态工厂方法配置bean，注意不是配置静态工厂方法实例，而是配置bean实例
+        class属性：指向静态工厂方法的全类名
+        factory-method:指向静态工厂方法的名字
+        constructor-arg:如果工厂方法需要传入参数，则使用contructor-arg来配置参数
+    -->
+    <bean id = "car" class="com.lihuijuan.spring.beans.factory.StaticCarFactory"
+          factory-method="getCar">
+          <constructor-arg value="audi"></constructor-arg>
+    </bean>
+
+</beans>
+```
+测试：
+```
+public static void main(String[]args){
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean-factory.xml");
+        Car car = (Car) context.getBean("car");
+        System.out.println(car.toString());
+    }
+```
+输出为:
+```
+Car{name='audi', price=300000}
+```
+
+
 Spring4.x新特性：泛型依赖注入
