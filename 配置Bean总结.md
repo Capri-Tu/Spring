@@ -308,6 +308,113 @@ false
 ```
 说明每次调用getBean，就会生成一个新的bean，也就是会创建多例
 
-IOC容器中Bean的生命周期
+使用外部属性文件
+--
+这部分以后再看。
 
+SpEL
+--
+语言
+
+IOC容器中Bean的生命周期
+--
+Spring容器可以管理Bean的生命周期，类似于Servlet容器管理Servlet的生命周期一样。
+
+Car类添加了两个方法initCar()和destroyCar()分别用来作为init-method和destroy-method
+```
+package com.lihuijuan.spring.beans.cycle;
+
+public class Car {
+    private String brand;
+    private String corp;
+    private double price;
+    private int maxSpeed;
+    public Car(){
+        System.out.println("Construct Car");
+    }
+    public Car(String brand,String corp,double price){
+        System.out.println("Construct Car....");
+        this.brand = brand;
+        this.corp = corp;
+        this.price = price;
+    }
+    public Car(String brand,String corp,int maxSpeed){
+        System.out.println("Construct Car....");
+        this.brand = brand;
+        this.corp = corp;
+        this.maxSpeed = maxSpeed;
+    }
+    public Car(String brand,String corp,double price,int maxSpeed){
+        System.out.println("Construct Car....");
+        this.brand = brand;
+        this.corp = corp;
+        this.price = price;
+        this.maxSpeed = maxSpeed;
+    }
+    public void setBrand(String brand) {
+        System.out.println("Setter: Construct Car ....");
+        this.brand = brand;
+    }
+
+    public void setCorp(String corp) {
+        this.corp = corp;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public void initCar(){
+        System.out.println("init...");
+
+    }
+    public void destroyCar(){
+        System.out.println("destroy...");
+    }
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", corp='" + corp + '\'' +
+                ", price=" + price +
+                ", maxSpeed=" + maxSpeed +
+                '}';
+    }
+}
+
+```
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="car" class="com.lihuijuan.spring.beans.cycle.Car"
+          init-method="initCar" destroy-method="destroyCar"
+          scope="singleton" p:brand="sss" p:corp="adf" p:price="222" p:maxSpeed="32">
+    </bean>
+</beans>
+```
+
+```
+public static void main(String[]args){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean-cycle.xml");
+        context.getBean("car");
+        //IOC容器close，才会调用bean的destroy-method
+        context.close();
+    }
+```
+输出为:
+```
+Construct Car  //无参构造函数
+Setter: Construct Car ....  //setter方法
+init...
+十月 08, 2018 9:12:04 下午 org.springframework.context.support.ClassPathXmlApplicationContext doClose
+destroy...
+```
 Spring4.x新特性：泛型依赖注入
