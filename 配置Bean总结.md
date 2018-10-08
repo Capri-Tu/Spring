@@ -134,6 +134,15 @@ public class Person {
     </bean>
 ```
 
+如果将某个属性赋值为Null
+```
+<bean id="person" class="com.lihuijuan.spring.beans.Person">
+        <constructor-arg value="Ford"></constructor-arg>
+        <constructor-arg value="1"></constructor-arg>
+        <!--测试赋值null-->
+        <constructor-arg><null></null></constructor-arg>
+    </bean>
+```
 
 Bean的作用域：Singleton；prototype;WEB环境作用域
 
