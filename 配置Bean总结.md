@@ -216,6 +216,49 @@ XML配置里的Bean自动装配的缺点:
 
 Bean之间的关系：继承；依赖
 --
+Spring允许继承bean的配置，被继承的bean称为父bean，继承这个父bean的bean称为子bean
+
+子bean也可以覆盖从父bean继承过来的配置
+
+```
+ <bean id="address" class="com.lihuijuan.spring.beans.Address"
+          p:city="beijing" p:street="wudaokou"></bean>
+    <!--bean配置的继承：使用bean的parent属性指定继承哪个bean的配置-->
+    <bean id = "address2" p:street = "dazhongsi" parent="address"></bean>
+```
+
+父bean可以作为配置模板，也可以作为bean的实例。若只想把父bean作为模板，可以设置<bean>的abstract属性为true，这样Spring就不会实例化这个bean
+```
+    <!--抽象bean，不能被实例化-->
+    <bean id="address" class="com.lihuijuan.spring.beans.Address"
+          p:city="beijing" p:street="wudaokou" abstract="true"></bean>
+    <!--bean配置的继承：使用bean的parent属性指定继承哪个bean的配置-->
+    <bean id = "address2" p:street = "dazhongsi" parent="address"></bean>
+```
+
+
+并不是<bean>元素里的所有属性都会被继承，比如：autowire,abstract等
+    
+也可以忽略父bean的class属性，让子bean指定自己的类，而共享相同的属性配置，但此时abstract必须设为true
+
+```
+ <!--若某一个bean没有指定class属性，则必须设置为抽象bean：abstract=true-->
+    <bean id="address" abstract="true">
+        <property name="city" value="beijing"></property>
+    </bean>
+    <!--bean配置的继承：使用bean的parent属性指定继承哪个bean的配置-->
+    <bean id = "address2" class="com.lihuijuan.spring.beans.Address"
+          p:street = "dazhongsi" parent="address"></bean>
+```
+
+如果增加一个depends-on属性，那么声明的依赖的bean id必须被配置，这样做只是为了不让该属性为null
+
+```
+   <bean id="person" class="com.lihuijuan.spring.beans.Person"
+          p:name="Tom" p:car-ref="car" ></bean>
+   <bean id = "address2" class="com.lihuijuan.spring.beans.Address"
+          p:street = "dazhongsi" depends-on="person"></bean>
+```
 
 Bean的作用域：Singleton；prototype;WEB环境作用域
 
